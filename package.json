@@ -11,7 +11,19 @@
   },
   "dependencies": {
     "nuxt": "^3.13.0",
+    "ogl": "^1.0.8",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "eslintConfig": {
+    "root": true,
+    "ignorePatterns": [
+      "**"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13"
   }
 }

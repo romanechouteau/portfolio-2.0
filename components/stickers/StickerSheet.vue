@@ -21,7 +21,7 @@
         name="digital"
         class="col-span-1 mx-auto my-auto"
         ratio="389/450"
-        stickerTransform="translate-x-[-4%] translate-y-[-6%] rotate-[8deg]" />
+        stickerTransform="translate-x-[4%] translate-y-[-6%] rotate-[-9deg]" />
     </div>
   </div>
 </template>

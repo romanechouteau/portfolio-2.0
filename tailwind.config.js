@@ -15,6 +15,8 @@ export default {
     spacing: () => {
       const v = {};
 
+      v["grid-gap"] = "var(--grid-gap)";
+
       for (let i = 0; i <= 50; i++) {
         v[`${i * 8}`] = rem(i * 8);
       }

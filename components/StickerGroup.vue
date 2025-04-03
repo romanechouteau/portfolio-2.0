@@ -1,10 +1,11 @@
 <template>
   <div :class="`relative ${sizeClass}`">
     <div
-      class="bg-gray-50 w-full h-full sticker-back-mask"
+      class="bg-neutral-50 w-full sticker-back-mask"
       :style="{ '--url': `url(/assets/stickers/${name}.png)` }"
-    />
-    <img :src="`/assets/stickers/${name}.png`" class="invisible" />
+    >
+      <img :src="`/assets/stickers/${name}.png`" class="invisible" />
+    </div>
     <Sticker
       :name="name"
       :class="sizeClass"

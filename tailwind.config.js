@@ -27,6 +27,12 @@ export default {
       domine: ["Domine", "serif"]
     },
     extend: {
+      borderWidth: ({ theme }) => ({
+        ...theme("spacing"),
+      }),
+      borderRadius: ({ theme }) => ({
+        ...theme("spacing"),
+      }),
       fontSize: ({ theme }) => ({
         ...theme("spacing"),
       }),

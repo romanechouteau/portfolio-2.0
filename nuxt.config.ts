@@ -7,5 +7,11 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
-  }
+  },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    }
+  ]
 })

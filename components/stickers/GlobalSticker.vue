@@ -1,35 +1,52 @@
 <template>
   <div
     ref="wrapper"
-    :class="{
-      'absolute left-0 top-0': !isMoved,
-      'fixed': isMoved,
-      'cursor-grabbing z-20': isGrabbing,
-      'hover:cursor-grab z-10': !isGrabbing
-    }"
+    :class="[
+      'absolute',
+      isGrabbing ? 'cursor-grabbing z-20': 'hover:cursor-grab z-10'
+    ]"
     @mousedown="onMouseDown"
   >
     <img
       ref="sticker"
       :src="`assets/stickers/${name}.png`"
-      :class="`select-none ${transformClass}`"
+      :class="['select-none w-full h-full', transformClass]"
       draggable="false"
+      @load="loaded"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import gsap from "gsap";
+import { toFront } from "~/store/Stickers";
 
-defineProps(['name', 'transformClass']);
+const { stickerData } = defineProps(['stickerData']);
+const { name, width, height, startX, startY, startEvt, setVisibility, transformClass } = stickerData;
 
 const wrapper = ref<HTMLDivElement | null>(null);
 const sticker = ref<HTMLImageElement | null>(null);
 
 const isGrabbing = ref<boolean>(false);
-const isMoved = ref<boolean>(false);
 const position = ref({ x: 0, y: 0 });
 const mousePosition = ref({ x: 0, y: 0 });
+
+// wait for image to load to hide fixed sticker
+const loaded = () => {
+  setVisibility(false);
+}
+
+// setup sticker on mounted
+onMounted(() => {
+  position.value.x = startX;
+  position.value.y = startY;
+  wrapper.value.style.left = `${position.value.x}px`;
+  wrapper.value.style.top = `${position.value.y}px`;
+  wrapper.value.style.width = `${width}px`;
+  wrapper.value.style.height = `${height}px`;
+
+  onMouseDown(startEvt);
+})
 
 const onMouseDown = (evt: MouseEvent) => {
   if (!wrapper.value) return;
@@ -38,15 +55,7 @@ const onMouseDown = (evt: MouseEvent) => {
   mousePosition.value.x = evt.clientX;
   mousePosition.value.y = evt.clientY + window.scrollY;
 
-  // set elem position
-  const { x, y } = wrapper.value.getBoundingClientRect();
-  position.value.x = x;
-  position.value.y = y + window.scrollY;
-  wrapper.value.style.left = `${position.value.x / window.innerWidth * 100}vw`;
-  wrapper.value.style.top = `${position.value.y}px`;
-
-  // update state
-  isMoved.value = true;
+  // update grabbing state
   isGrabbing.value = true;
 
   // add event listeners
@@ -62,6 +71,8 @@ const onMouseDown = (evt: MouseEvent) => {
     duration: 0.3,
     ease: 'bounce.in'
   });
+
+  toFront(stickerData);
 };
 
 const onMouseMove = (evt: MouseEvent) => {
@@ -82,12 +93,12 @@ const onMouseMove = (evt: MouseEvent) => {
   // update elem position
   position.value.x += offsetX;
   position.value.y += offsetY;
-  wrapper.value.style.left = `${position.value.x / window.innerWidth * 100}vw`;
+  wrapper.value.style.left = `${position.value.x}px`;
   wrapper.value.style.top = `${position.value.y}px`;
 }
 
 const onMouseUp = () => {
-  // update state
+  // update grabbing state
   isGrabbing.value = false;
 
   // remove event listeners

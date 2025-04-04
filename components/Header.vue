@@ -3,7 +3,7 @@
     ref="header"
     class="container fixed h-80 pt-16 left-1/2 -translate-x-1/2 z-30"
   >
-    <div class="w-full h-full bg-neutral-400 flex items-center justify-between px-32">
+    <div class="w-full h-full bg-gray-300 flex items-center justify-between px-32">
       <span class="col-span-full">romane chouteau</span>
       <ul class="flex gap-32">
         <li>my work</li>

@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+import { COLORS } from "./utils/colors";
+
 const rem = (px) => (px ? `${(px / 16).toFixed(7)}rem` : "0rem");
 
 export default {
@@ -12,6 +14,9 @@ export default {
     "./error.vue"
   ],
   theme: {
+    colors: {
+      ...COLORS,
+    },
     spacing: () => {
       const v = {};
 
@@ -25,6 +30,13 @@ export default {
     },
     fontFamily: {
       domine: ["Domine", "serif"]
+    },
+    variables: {
+      DEFAULT: {
+        colors: {
+          ...COLORS,
+        },
+      },
     },
     extend: {
       borderWidth: ({ theme }) => ({
@@ -44,5 +56,7 @@ export default {
       }),
     },
   },
-  plugins: [],
+  plugins: [
+    require('@mertasan/tailwindcss-variables'),
+  ],
 }

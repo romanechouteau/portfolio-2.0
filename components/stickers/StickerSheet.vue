@@ -1,6 +1,6 @@
 <template>
-  <div class="col-span-5 bg-neutral-200 aspect-square grid grid-rows-5">
-    <div class="row-span-1 bg-neutral-300"></div>
+  <div class="bg-gray-100 aspect-square grid grid-rows-5">
+    <div class="row-span-1 bg-gray-200"></div>
     <div class="row-span-4 p-24 grid grid-cols-3 grid-rows-2 gap-24">
       <StickerWBack
         name="creative-developer"

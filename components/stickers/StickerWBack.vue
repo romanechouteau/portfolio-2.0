@@ -4,10 +4,13 @@
     :style="{ 'aspect-ratio': ratio }"
   >
     <div
-      class="absolute bg-neutral-50 w-full h-full sticker-back-mask"
+      class="absolute bg-gray-50 w-full h-full sticker-back-mask"
       :style="{ '--url': `url(/assets/stickers/${name}.png)` }"
     ></div>
-    <Sticker :name="name" :transformClass="stickerTransform" />
+    <Sticker
+      class="relative"
+      :name="name"
+      :transformClass="stickerTransform" />
   </div>
 </template>
 

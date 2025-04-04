@@ -1,6 +1,6 @@
 <template>
   <div class="container grid grid-cols-12 gap-grid-gap pt-128 pb-32">
-    <StickerSheet />
+    <StickerSheet class="col-span-5"/>
     <LinedPaper class="col-span-4">
       <p>hi! i'm romane chouteau, a 23 year old french developer :)</p>
     </LinedPaper>
@@ -9,7 +9,7 @@
       <Tray class="h-full" />
     </div>
     <div class="col-span-12 aspect-[16/9]">
-      <div class="w-full h-full bg-neutral-200"></div>
+      <div class="w-full h-full bg-gray-100"></div>
     </div>
   </div>
   <GlobalStickers />

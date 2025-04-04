@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { Stickers, resetStickers } from "~/store/Stickers";
+import { Stickers, resetStickers } from "@/store/Stickers";
 
 const stickerList = computed(() => {
   return Stickers.list;

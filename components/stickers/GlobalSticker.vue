@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import gsap from "gsap";
-import { toFront } from "~/store/Stickers";
+import { toFront } from "@/store/Stickers";
 
 const { stickerData } = defineProps(['stickerData']);
 const { name, width, height, startX, startY, startEvt, setVisibility, transformClass } = stickerData;
@@ -40,10 +40,13 @@ const loaded = () => {
 onMounted(() => {
   position.value.x = startX;
   position.value.y = startY;
-  wrapper.value.style.left = `${position.value.x}px`;
-  wrapper.value.style.top = `${position.value.y}px`;
-  wrapper.value.style.width = `${width}px`;
-  wrapper.value.style.height = `${height}px`;
+
+  if (wrapper.value) {
+    wrapper.value.style.left = `${position.value.x}px`;
+    wrapper.value.style.top = `${position.value.y}px`;
+    wrapper.value.style.width = `${width}px`;
+    wrapper.value.style.height = `${height}px`;
+  }
 
   onMouseDown(startEvt);
 })

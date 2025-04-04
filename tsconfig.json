@@ -4,7 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@webgl/*": ["webgl/*"],
+      "@/webgl/*": ["webgl/*"],
+      "@/store/*": ["store/*"],
+      "@/utils/*": ["utils/*"],
     },
   },
 }

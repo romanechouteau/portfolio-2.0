@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { addSticker } from "~/store/Stickers";
+import { addSticker } from "@/store/Stickers";
 
 const { name, transformClass } = defineProps(['name', 'transformClass']);
 
@@ -38,7 +38,7 @@ const onMouseDown = (evt: MouseEvent) => {
     width,
     height,
     startX: x,
-    startY: y,
+    startY: y + window.scrollY,
     startEvt: evt,
     transformClass,
     setVisibility,

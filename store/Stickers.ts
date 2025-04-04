@@ -1,4 +1,4 @@
-import { reactive, type Ref } from "vue";
+import { reactive } from "vue";
 
 export type Sticker = {
   name: string,

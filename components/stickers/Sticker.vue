@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import gsap from "gsap";
 import { addSticker } from "~/store/Stickers";
 
 const { name, transformClass } = defineProps(['name', 'transformClass']);

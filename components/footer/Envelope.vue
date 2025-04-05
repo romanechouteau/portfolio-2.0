@@ -1,7 +1,13 @@
 <template>
-  <div class="aspect-[32/27] grid grid-rows-3">
+  <div
+    ref="envelope"
+    class="aspect-[32/27] grid grid-rows-3"
+  >
     <div class="relative mx-32">
-      <div class="absolute w-full h-[200%] p-32 bg-gray-50 translate-y-1/2">
+      <div
+        ref="paper"
+        class="absolute w-full h-[200%] p-32 bg-gray-50 translate-y-1/2"
+      >
         <div class="w-full h-full flex flex-col items-center justify-center">
           <a>hello@romanechoutau.fr</a>
         </div>
@@ -15,6 +21,29 @@
     <div class="relative bg-gray-500 pointer-events-none"></div>
   </div>
 </template>
+
+<script setup lang="ts">
+import gsap from "gsap";
+
+const envelope = ref<HTMLDivElement | null>(null);
+const paper = ref<HTMLDivElement | null>(null);
+
+onMounted(() => {
+  gsap.fromTo(paper.value, {
+      translateY: "50%"
+    }, {
+      translateY: "0",
+      duration: 1,
+      scrollTrigger: {
+        trigger: envelope.value,
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: 1,
+        once: true,
+      },
+    });
+  });
+</script>
 
 <style>
 .envelope-opening {

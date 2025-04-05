@@ -21,6 +21,16 @@ const header = ref<HTMLElement | null>(null);
 const visible = ref(true);
 const scrollY = ref(0);
 
+// --SCROLL ANIMATION--
+
+onMounted(async () => {
+  window.addEventListener("scroll", onScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", onScroll);
+});
+
 const onScroll = () => {
   if (!header.value) return;
 
@@ -43,12 +53,4 @@ const onScroll = () => {
     });
   }
 }
-
-onMounted(async () => {
-  window.addEventListener("scroll", onScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", onScroll);
-});
 </script>

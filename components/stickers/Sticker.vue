@@ -25,14 +25,16 @@ const setVisibility = (val: boolean) => {
   invisible.value = !val;
 }
 
-// send sticker data to global stickers
+// --MOUSE DOWN--
+
 const onMouseDown = (evt: MouseEvent) => {
   if (!wrapper.value) return;
 
   // get sticker position & size
   const { x, y, width, height } = wrapper.value.getBoundingClientRect();
 
-  // send all data
+  // send data to global sticker store
+  // a global sticker will be created to replace the local sticker
   addSticker({
     name,
     width,

@@ -13,9 +13,7 @@ const stickerList = computed(() => {
   return Stickers.list;
 })
 
-const onResize = () => {
-  resetStickers();
-}
+// --WINDOW RESIZE--
 
 onMounted(() => {
   window.addEventListener('resize', onResize);
@@ -24,4 +22,9 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('resize', onResize);
 })
+
+const onResize = () => {
+  // all stickers go back to their original position
+  resetStickers();
+}
 </script>

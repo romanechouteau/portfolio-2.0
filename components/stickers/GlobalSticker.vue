@@ -31,6 +31,8 @@ const isGrabbing = ref<boolean>(false);
 const position = ref({ x: 0, y: 0 });
 const mousePosition = ref({ x: 0, y: 0 });
 
+// --STICKER SETUP--
+
 // wait for image to load to hide fixed sticker
 const loaded = () => {
   setVisibility(false);
@@ -50,6 +52,8 @@ onMounted(() => {
 
   onMouseDown(startEvt);
 })
+
+// --STICKER MOVEMENT--
 
 const onMouseDown = (evt: MouseEvent) => {
   if (!wrapper.value) return;

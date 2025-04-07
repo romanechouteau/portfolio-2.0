@@ -1,5 +1,5 @@
 @layer base {
   body {
-    @apply [--grid-gap:1rem] md:[--grid-gap:2rem];
+    @apply [--grid-gap:1rem] md:[--grid-gap:min(2vw,2rem)];
   }
 }

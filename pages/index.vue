@@ -6,7 +6,11 @@
     </LinedPaper>
     <div class="col-span-3 flex flex-col gap-grid-gap">
       <PostIt class="aspect-square" />
-      <Tray class="h-full" />
+      <div class="relative w-full h-full">
+        <img
+          src="@/assets/images/smiski.svg"
+          class="absolute top-0 left-0 w-[102%] max-w-none h-auto"/>
+      </div>
     </div>
     <Projects class="col-span-12" />
   </div>

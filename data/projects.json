@@ -1,0 +1,12 @@
+{
+  "projects": [
+    {
+      "name": "kaizen",
+      "color": "gray-200"
+    },
+    {
+      "name": "test 1234",
+      "color": "gray-100"
+    }
+  ]
+}

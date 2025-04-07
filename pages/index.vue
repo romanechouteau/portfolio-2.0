@@ -8,9 +8,7 @@
       <PostIt class="aspect-square" />
       <Tray class="h-full" />
     </div>
-    <div class="col-span-12 aspect-[16/9]">
-      <div class="w-full h-full bg-gray-100"></div>
-    </div>
+    <Projects class="col-span-12" />
   </div>
   <GlobalStickers />
 </template>

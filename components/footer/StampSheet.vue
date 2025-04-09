@@ -3,7 +3,7 @@
     <StickerWBack
       v-for="index in 6"
       :key="index"
-      name="stamp"
+      :name="`stamp-${index % 2 == 0 ? '1' : '2'}`"
       class="col-span-1"
       ratio="136/102" />
   </div>

@@ -36,6 +36,7 @@ const onMouseDown = (evt: MouseEvent) => {
   // send data to global sticker store
   // a global sticker will be created to replace the local sticker
   addSticker({
+    id: Date.now(),
     name,
     width,
     height,

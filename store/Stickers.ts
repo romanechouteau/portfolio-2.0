@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 
 export type Sticker = {
+  id: number,
   name: string,
   width: number,
   height: number,

@@ -1,7 +1,7 @@
 <template>
   <GlobalSticker
     v-for="sticker of stickerList"
-    :key="sticker.name"
+    :key="sticker.id"
     :stickerData="sticker"
   />
 </template>

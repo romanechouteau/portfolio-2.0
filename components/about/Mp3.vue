@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="aspect-[437/112] bg-gray-50 rounded-full flex justify-center items-center">
+    <div class="w-[50%] h-[40%] py-8 px-16 bg-gray-600 text-white overflow-hidden">
+      <span :class="isOn ? '' : 'opacity-0'">{{ text }}</span>
+    </div>
     <div class="flex gap-8">
       <button @click="play">play</button>
       <button @click="pause">pause</button>
       <button @click="prevTrack"><<</button>
       <button @click="nextTrack">>></button>
-    </div>
-    <div class="w-full py-8 px-16 bg-gray-600 text-white">
-      <span :class="isOn ? '' : 'opacity-0'">{{ text }}</span>
     </div>
   </div>
 </template>

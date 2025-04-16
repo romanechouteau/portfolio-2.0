@@ -1,14 +1,25 @@
 <template>
-  <div class="aspect-[437/112] bg-gray-50 rounded-full flex justify-center items-center">
-    <div class="w-[50%] h-[40%] py-8 px-16 bg-gray-600 text-white overflow-hidden">
+  <div class="relative aspect-[437/128]">
+    <img
+      src="@/assets/images/mp3.svg"
+      class="absolute top-0 left-0 w-[101.5%] max-w-none h-auto"/>
+    <div
+      class="absolute left-[36.5%] top-[48%] -translate-y-1/2 -translate-x-1/2 w-[40%] h-[35%] rounded-[.3vw] bg-gray-600 text-white overflow-hidden flex items-center"
+    >
       <span :class="isOn ? '' : 'opacity-0'">{{ text }}</span>
     </div>
-    <div class="flex gap-8">
-      <button @click="play">play</button>
-      <button @click="pause">pause</button>
-      <button @click="prevTrack"><<</button>
-      <button @click="nextTrack">>></button>
-    </div>
+    <button
+      class="absolute right-[9%] top-1/2 -translate-y-1/2 -translate-x-1/2 w-[8%] aspect-square rounded-full"
+      @click="togglePlay">
+    </button>
+    <button
+      class="absolute right-[19.3%] top-1/2 -translate-y-1/2 -translate-x-1/2 w-[3%] h-[20%]"
+      @click="prevTrack">
+    </button>
+    <button
+      class="absolute right-[8.6%] top-1/2 -translate-y-1/2 -translate-x-1/2 w-[3%] h-[20%]"
+      @click="nextTrack">
+    </button>
   </div>
 </template>
 
@@ -56,15 +67,22 @@ const powerOn = () => {
 
 // PLAY/PAUSE
 
+const togglePlay = () => {
+  if (isPlaying.value) {
+    pause();
+  } else {
+    play();
+  }
+}
+
 const play = () => {
   powerOn();
-  if (isPlaying.value) return;
   isPlaying.value = true;
   audio.value?.play();
 }
 
 const pause = () => {
-  if (!isPlaying.value || !isOn.value) return;
+  if (!isOn.value) return;
   isPlaying.value = false;
   audio.value?.pause();
 }

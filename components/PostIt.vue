@@ -22,9 +22,11 @@ const wrapper = ref<HTMLDivElement | null>(null);
 const canvas = ref<HTMLCanvasElement | null>(null);
 const ctx = ref<CanvasRenderingContext2D | null>(null);
 
+const size = ref(4);
+const sizeRatio = 0.014;
+const pixelRatio = ref(1);
 const position = ref({ x: 0, y: 0 });
 const color = COLORS["gray-800"];
-const size = 2;
 
 // --CANVAS SETUP--
 
@@ -43,8 +45,11 @@ const onResize = () => {
   if (!canvas.value || !wrapper.value) return;
 
   const { width, height } = wrapper.value.getBoundingClientRect();
-  canvas.value.width = width;
-  canvas.value.height = height;
+
+  pixelRatio.value = Math.min(window.devicePixelRatio, 3);
+  size.value = Math.max(Math.round(width * sizeRatio), 1) * pixelRatio.value;
+  canvas.value.width = width * pixelRatio.value;
+  canvas.value.height = height * pixelRatio.value;
 }
 
 // --CANVAS DRAWING--
@@ -52,8 +57,8 @@ const onResize = () => {
 const getCoords = (mouseX: number, mouseY: number, cvs: HTMLCanvasElement) => {
   const { x, y } = cvs.getBoundingClientRect();
   return {
-    x: mouseX - x,
-    y: mouseY - y
+    x: (mouseX - x) * pixelRatio.value,
+    y: (mouseY - y) * pixelRatio.value
   }
 }
 
@@ -71,12 +76,13 @@ const onMouseMove = (evt: MouseEvent) => {
   ctx.value.beginPath();
   ctx.value.moveTo(position.value.x, position.value.y);
   ctx.value.strokeStyle = color;
-  ctx.value.lineWidth = size;
+  ctx.value.lineWidth = size.value;
+  ctx.value.lineJoin = "round";
 
   position.value = getCoords(evt.clientX, evt.clientY, canvas.value);
   ctx.value.lineTo(position.value.x, position.value.y);
-  ctx.value.stroke();
   ctx.value.closePath();
+  ctx.value.stroke();
 }
 
 const onMouseUp = () => {

@@ -4,7 +4,7 @@
       src="@/assets/images/mp3.svg"
       class="absolute top-0 left-0 w-[101.5%] max-w-none h-auto"/>
     <div
-      class="absolute left-[36.5%] top-[48%] -translate-y-1/2 -translate-x-1/2 w-[40%] h-[35%] rounded-[.3vw] text-gray-800 bg-gray-600 overflow-hidden"
+      class="absolute left-[36.5%] top-[48%] -translate-y-1/2 -translate-x-1/2 w-[40%] h-[35%] rounded-[.3vw] bg-gray-600 text-gray-800 font-anonymous-pro not-italic overflow-hidden"
     >
       <div :class="[
         'w-full h-full flex items-center  shadow-[inset_0_0_1.5vw_0.8vw_var(--colors-pink)] transition-opacity duration-500 ease-in-out',
@@ -22,7 +22,7 @@
               v-for="index in 3"
               :key="index"
               :class="[
-                'marquee-text shrink-0 px-16',
+                'marquee-text shrink-0 px-8',
                 !isPlaying && 'paused'
               ]"
               :style="{ animationDuration: `${track.marqueeDuration}s` }"

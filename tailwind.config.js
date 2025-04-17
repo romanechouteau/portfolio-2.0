@@ -29,7 +29,8 @@ export default {
       return v;
     },
     fontFamily: {
-      domine: ["Domine", "serif"]
+      "libre-baskerville": ["Libre Baskerville", "serif"],
+      "anonymous-pro": ["Anonymous Pro", "monospace"]
     },
     variables: {
       DEFAULT: {

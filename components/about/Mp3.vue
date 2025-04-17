@@ -4,9 +4,34 @@
       src="@/assets/images/mp3.svg"
       class="absolute top-0 left-0 w-[101.5%] max-w-none h-auto"/>
     <div
-      class="absolute left-[36.5%] top-[48%] -translate-y-1/2 -translate-x-1/2 w-[40%] h-[35%] rounded-[.3vw] bg-gray-600 text-white overflow-hidden flex items-center"
+      class="absolute left-[36.5%] top-[48%] -translate-y-1/2 -translate-x-1/2 w-[40%] h-[35%] rounded-[.3vw] text-gray-800 bg-gray-600 overflow-hidden"
     >
-      <span :class="isOn ? '' : 'opacity-0'">{{ text }}</span>
+      <div :class="[
+        'w-full h-full flex items-center  shadow-[inset_0_0_1.5vw_0.8vw_var(--colors-pink)] transition-opacity duration-500 ease-in-out',
+        isOn ? 'opacity-100' : 'opacity-0'
+      ]">
+        <template
+          v-for="(track, i) in tracks"
+          :key="i"
+        >
+          <ul
+            v-if="isOn && i === currentTrackIndex"
+            class="list-none p-0 m-0 flex"
+          >
+            <li
+              v-for="index in 3"
+              :key="index"
+              :class="[
+                'marquee-text shrink-0 px-16',
+                !isPlaying && 'paused'
+              ]"
+              :style="{ animationDuration: `${track.marqueeDuration}s` }"
+            >
+              {{ track.name }}
+            </li>
+          </ul>
+        </template>
+      </div>
     </div>
     <button
       class="absolute right-[9%] top-1/2 -translate-y-1/2 -translate-x-1/2 w-[8%] aspect-square rounded-full"
@@ -24,7 +49,13 @@
 </template>
 
 <script setup lang="ts">
-import { type Track, type Playlist } from 'types/Deezer';
+import { type Track as DeezerTrack, type Playlist } from 'types/Deezer';
+
+type Track = {
+  preview: string;
+  name: string;
+  marqueeDuration: number;
+}
 
 const { data } = await useFetch('https://api.deezer.com/playlist/13731949981');
 
@@ -33,27 +64,26 @@ const currentTrackIndex = ref(0);
 const isOn = ref(false);
 const isPlaying = ref(false);
 
-// DATA
+// TRACKS DATA
 
-const tracks = (data.value as Playlist).tracks.data.reduce((acc: Track[], track: Track) => {
+const getTrackName = (track: DeezerTrack) => {
+  const title = track.title.replaceAll(" ", "_");
+  const artist = track.artist.name.replaceAll(" ", "_");
+  const explicit = track.explicit_lyrics ? "_(explicit)" : "";
+  return `${title}${explicit}_${artist}_(preview).mp3`;
+}
+
+const tracks = (data.value as Playlist).tracks.data.reduce((acc: Track[], track: DeezerTrack) => {
     if (track.preview) {
-      acc.push(track);
+      const name = getTrackName(track);
+      acc.push({
+        preview: track.preview,
+        name,
+        marqueeDuration: name.length * 0.3
+      });
     }
     return acc;
   }, [] as Track[]);
-
-const currentTrack = computed(() => {
-  if (tracks.length == 0) return null;
-  return tracks[currentTrackIndex.value];
-})
-
-const text = computed(() => {
-  if (!currentTrack.value) return " ";
-  const title = currentTrack.value.title.replaceAll(" ", "_");
-  const artist = currentTrack.value.artist.name.replaceAll(" ", "_");
-  const explicit = currentTrack.value.explicit_lyrics ? "_(explicit)" : "";
-  return `${title}${explicit}_${artist}_(preview).mp3`;
-})
 
 // POWER ON (SETUP)
 
@@ -90,9 +120,10 @@ const pause = () => {
 // TRACKS CHANGE
 
 const changeTrack = () => {
-  if (!audio.value || !currentTrack.value) return;
+  const currentTrack = tracks[currentTrackIndex.value];
+  if (!audio.value || !currentTrack) return;
   audio.value.pause();
-  audio.value.src = currentTrack.value.preview;
+  audio.value.src = currentTrack.preview;
   audio.value.play();
 }
 
@@ -118,3 +149,23 @@ onBeforeUnmount(() => {
   audio.value = null;
 });
 </script>
+
+<style scoped>
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  } to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee-text {
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.marquee-text.paused {
+  animation-play-state: paused;
+}
+</style>

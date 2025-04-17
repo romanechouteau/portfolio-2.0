@@ -10,4 +10,5 @@ export const COLORS = {
   "gray-700": "#333333",
   "gray-800": "#1A1A1A",
   "black": "#000000",
+  "pink": "#ED439D"
 }
